@@ -8,7 +8,7 @@ TODO: update arxiv ref
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" height=22.5></a>  
 
 Inference Notebook: <a href="http://colab.research.google.com/github/yuval-alaluf/hyperstyle/blob/master/notebooks/inference_playground.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" height=20></a>  
-Animation Notebook: <a href="http://colab.research.google.com/github/yuval-alaluf/hyperstyle/blob/master/notebooks/inference_playground.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" height=20></a>  
+Animation Notebook: <a href="http://colab.research.google.com/github/yuval-alaluf/hyperstyle/blob/master/notebooks/animations_playground.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" height=20></a>  
 
 
 <p align="center">
