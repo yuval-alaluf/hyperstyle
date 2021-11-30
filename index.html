@@ -1,0 +1,517 @@
+
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>HyperStyle</title>
+    
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+              integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link href="images/thumbnail.jpg"
+              rel="shortcut icon" type="image/x-icon"/>
+
+        <script type="text/javascript" src="jquery.mlens-1.0.min.js"></script>
+        <script type="text/javascript" src="jquery.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+
+        <style>
+            body {
+                font-family: 'Open-Sans', sans-serif;
+                font-weight: 300;
+                background-color: #fff;
+            }
+    
+            .content {
+                width: 1000px;
+                padding: 25px 50px;
+                margin: 25px auto;
+                background-color: white;
+                box-shadow: 0px 0px 10px #999;
+                border-radius: 15px;
+            }
+    
+            .contentblock {
+                width: 950px;
+                margin: 0 auto;
+                padding: 0;
+                border-spacing: 25px 0;
+            }
+    
+            .contentblock td {
+                background-color: #fff;
+                padding: 25px 50px;
+                vertical-align: top;
+                box-shadow: 0px 0px 10px #999;
+                border-radius: 15px;
+            }
+    
+            a,
+            a:visited {
+                color: #224b8d;
+                font-weight: 300;
+            }
+    
+            #authors {
+                text-align: center;
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+    
+            #conference {
+                text-align: center;
+                margin-bottom: 20px;
+                font-style: italic;
+            }
+    
+            #authors a {
+                margin: 0 15px;
+            }
+    
+            h1 {
+                text-align: center;
+                font-size: 35px;
+                font-weight: 300;
+            }
+    
+            h2 {
+                font-size: 30px;
+                font-weight: 300;
+            }
+    
+            code {
+                display: block;
+                padding: 10px;
+                margin: 10px 10px;
+            }
+    
+            p {
+                line-height: 25px;
+                text-align: justify;
+            }
+    
+            p code {
+                display: inline;
+                padding: 0;
+                margin: 0;
+            }
+    
+            #teasers {
+                margin: 0 auto;
+            }
+    
+            #teasers td {
+                margin: 0 auto;
+                text-align: center;
+                padding: 5px;
+            }
+    
+            #teasers img {
+                width: 250px;
+            }
+    
+            #results img {
+                width: 133px;
+            }
+    
+            #seeintodark {
+                margin: 0 auto;
+            }
+    
+            #sift {
+                margin: 0 auto;
+            }
+    
+            #sift img {
+                width: 250px;
+            }
+    
+            .downloadpaper {
+                padding-left: 20px;
+                float: right;
+                text-align: center;
+            }
+    
+            .downloadpaper a {
+                font-weight: bold;
+                text-align: center;
+            }
+    
+            #demoframe {
+                border: 0;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                height: 340px;
+            }
+    
+            #feedbackform {
+                border: 1px solid #ccc;
+                margin: 0 auto;
+                border-radius: 15px;
+            }
+    
+            #eyeglass {
+                height: 530px;
+            }
+    
+            #eyeglass #wrapper {
+                position: relative;
+                height: auto;
+                margin: 0 auto;
+                float: left;
+                width: 800px;
+            }
+    
+            #mitnews {
+                font-weight: normal;
+                margin-top: 20px;
+                font-size: 14px;
+                width: 220px;
+            }
+    
+            #mitnews a {
+                font-weight: normal;
+            }
+    
+            .teaser-img {
+                width: 80%;
+                            display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+            }
+            .teaser-gif {
+                            display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+            }
+            .summary-img {
+                width: 100%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .small-img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+    
+            .iframe {
+                width: 100%;
+                height: 125%
+            }
+
+            /* Three image containers (use 25% for four, and 50% for two, etc) */
+            .column {
+                float: center;
+                padding: 5px;
+            }
+
+            /* Clear floats after image containers */
+            .row::after {
+            content: "";
+            clear: both;
+            display: table;
+            }
+    
+          .container {
+            display: flex;
+            align-items: center;
+            justify-content: center
+          }
+          .image {
+            flex-basis: 40%
+          }
+          .text {
+            font-size: 20px;
+            padding-left: 20px;
+          }
+
+        .sidebar-social {
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar-social ul {
+            margin: 0;
+            padding: 0px;
+        }
+
+        .sidebar-social li {
+            text-align: center;
+            /* width: 20.5%; */
+            margin-bottom: 3px!important;
+            background-color: #fff;
+            /* border: 1px solid #eee; */
+            display: inline-block;
+            padding:0;
+            margin: 0px 50 0px 0;
+        }
+
+        .sidebar-social i {
+            display: block;
+            margin: 0px auto 0px auto;
+            width: 32px;
+            height: 32px;
+            margin: 0px auto 0px auto;
+            line-height: 32px;
+            font-size: 50px;
+            color: #224b8d;
+            margin-top:7px;
+            padding-top:7px;
+        }
+
+        .sidebar-social a{
+            text-decoration:none;
+            /* width:100%; */
+            /* height:100%; */
+            /* display:block; */
+            align-items: center;
+            justify-content: center;
+            margin:0;
+            padding:0;
+        }
+
+        .sidebar-social a span{
+            color:#224b8d;
+            font-size:22px;
+            padding:10px 0px 0px 10px;
+            display:block;
+            text-transform:bold;
+            /* font-family:'Josefin Sans'; */
+            letter-spacing:1px;
+        }
+
+        .w-embed-youtubevideo {
+            width: 100%;
+            position: relative;
+            padding-bottom: 0;
+            padding-left: 0;
+            padding-right: 0;
+            background-image: url(https://d3e54v103j8qbb.cloudfront.net/static/youtube-placeholder.2b05e7d68d.svg);
+            background-size: cover;
+            background-position: 50% 50%
+        }
+
+        .w-embed-youtubevideo:empty {
+            min-height: 75px;
+            padding-bottom: 56.25%
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+            display: block
+        }
+
+            
+        </style>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+            <!--
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98008272-2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+    
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-98008272-2');
+        </script>
+        <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+        </script>
+            -->
+    
+    </head>
+    
+    <body>
+    
+        <div class="content">
+                <h1>HyperStyle: StyleGAN Inversion with HyperNetworks for Real Image Editing</h1>
+            <p id="authors" style="font-size:15pt; margin-left: 5%" style="text-align: center;">
+                <a style="text-decoration: none" href="https://yuval-alaluf.github.io/">Yuval Alaluf<sup style="text-decoration: none">*</sup></a>
+                <a style="text-decoration: none" href="https://scholar.google.com/citations?user=lbo_R54AAAAJ&hl=en">Omer Tov<sup style="text-decoration:none">*</sup></a>
+                <a style="text-decoration: none" href="https://il.linkedin.com/in/ron-mokady-665b5091">Ron Mokady</a>
+                <a style="text-decoration: none" href="https://rinongal.github.io/">Rinon Gal</a>
+                <a style="text-decoration: none" href="https://www.cs.tau.ac.il/~amberman/">Amit Bermano</a><br>
+            </p>
+            <p style="text-align:center; font-size:14pt">
+                Tel-Aviv University
+                <br><br>
+                <a style="font-size:12pt; color:black"> * Denotes Equal Contribution </a>
+            </p>
+            <br>
+
+
+            <div class="sidebar-social" style="text-align: center; margin-left: 4%">
+                <li><a href="" title="Paper" target="_blank" rel="nofollow"><i class="far fa-3x fa-file text-primary mb-3"></i><span><b>Paper</b></span></a></li>
+                <li><a href="https://github.com/yuval-alaluf/hyperstyle" title="Code" target="_blank" rel="nofollow"><i class="fab fa-3x fa-github text-primary mb-3"></i><span><b>Code</b></span></a></li>
+                <li><a href="https://colab.research.google.com/github/yuval-alaluf/hyperstyle/blob/master/notebooks/inference_playground.ipynb" title="Colab" target="_blank" rel="nofollow"><i class="fas fa-sticky-note"></i><span><b>Colab</b></span></a></li>
+                <!-- <li><a href="https://replicate.ai/yuval-alaluf/restyle_encoder" title="Demo" target="_blank" rel="nofollow"><i style="margin-left:12.5%" class="fas fa-laptop-code text-primary mb-3"></i><span><b>Demo</b></span></a></li> -->
+            </div>
+
+            <p>
+                <img class='teaser-img' src='images/teaser.jpg'></img>
+            </p>
+    
+                <p><strong>Abstract: </strong>
+                    The inversion of real images into StyleGAN's latent space is a well-studied problem. Nevertheless, applying existing approaches to real-world scenarios remains an open challenge, due to an inherent trade-off between reconstruction and editability: latent space regions which can accurately represent real images typically suffer from degraded semantic control. Recent work proposes to mitigate this trade-off by fine-tuning the generator to add the target image to well-behaved, editable regions of the latent space. While promising, this fine-tuning scheme is impractical for prevalent use as it requires a lengthy training phase for each new image. In this work, we introduce this approach into the realm of encoder-based inversion. We propose HyperStyle, a hypernetwork that learns to modulate StyleGAN's weights to faithfully express a given image in editable regions of the latent space. A naive modulation approach would require training a hypernetwork with over three billion parameters. Through careful network design, we reduce this to be in line with existing encoders. HyperStyle yields reconstructions comparable to those of optimization techniques with the near real-time inference capabilities of encoders. Lastly, we demonstrate HyperStyle's effectiveness on several applications beyond the inversion task, including the editing of out-of-domain images which were never seen during training.
+                </p>
+    
+            <br clear="all">
+        </div>
+
+        <!-- <div class="content" id="video">
+            <h2 style="text-align:center;">Video</h2>
+            <div class="w-embed-youtubevideo stega_movie youtube" id="w-node-e5e45b1d55ac-81500a5f" style="padding-top:56.17021276595745%">
+           <iframe allow="autoplay; encrypted-media" allowfullscreen="" frameBorder="0"
+                   src="https://www.youtube.com/embed/6pGzLECSIWM?rel=1&amp;controls=1&amp;autoplay=0&amp;mute=0&amp;start=0"
+                   style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:auto"></iframe>
+            </div>
+        </div> -->
+
+        <div class="content" id="samples">
+    
+            <h2 style="text-align:center;">Overview</h2>
+    
+                    <div class="container">
+                        <div class="text" style="text-align: center;">
+                            <p style="text-align: center">
+                                HyperStyle introduces hypernetworks for <i>learning</i> to refine the weights of a pre-trained StyleGAN generator with respect to a given input image.
+                                Doing so enables optimization-level reconstructions with encoder-like inference times and high editability.
+                            </div>
+                    </div>
+            <br>
+            <hr>
+            <p style="text-align: center;">
+                Most works studying inversion search for a latent code that most accurately reconstructs a given image.
+                Some recent works have proposed a per-image fine-tuning of the generator weights to achieve a high-quality reconstruction for a given target image. 
+                With HyperStyle, we aim to bring these generator tuning approaches to the realm of interactive applications by adapting it to an encoder-based approach.
+                <br><br>
+                We train a <i>single</i> hypernetwork to learn how to refine the generator weights with respect to a desired target image.
+                By learning this mapping, HyperStyle efficiently predicts the desired generator weights in less than 2 seconds per image, making it applicable to a wide-range of applications. 
+            </p>
+
+            <p style="text-align: center;">
+                Below, we illustate HyperStyle's reconstructions shown alongside the original input images.            
+            </p>
+
+            <span class="center" style="text-align: center;">
+                <video onloadeddata="this.play();" poster="poster.png" width="100%" playsinline loop muted controls>
+                    <source src="images/ffhq_hypernet_gif.mp4" type="video/mp4" />
+                    <source src="images/ffhq_hypernet_gif.mp4.webm" type="video/webm" />
+                    <source src="images/ffhq_hypernet_gif.mp4.ogg" type="video/ogg" />
+                    Your browser does not support the video tag or the file format of this video.
+                </video>
+            </span>
+            <br><br>
+            <span class="center" style="text-align: center;">
+                <video onloadeddata="this.play();" poster="poster.png" width="100%" playsinline loop muted controls>
+                    <source src="images/cars_hypernet_gif.mp4" type="video/mp4" />
+                    <source src="images/cars_hypernet_gif.mp4.webm" type="video/webm" />
+                    <source src="images/cars_hypernet_gif.mp4.ogg" type="video/ogg" />
+                    Your browser does not support the video tag or the file format of this video.
+                </video>
+            </span>
+
+            <hr>
+            <p style="text-align: center;">
+                We additionally demonstrate that even after modifying the pre-trained generator weights, HyperStyle preserves the appealing structure and semantics of the original latent space and generator.
+                This allows one to easily leverage off-the-shelf editing techniques such as StyleCLIP and InterFaceGAN on the resulting inversions.
+            
+            </p>
+            <p style="text-align: center;">
+                Below, we show various edits achieved with HyperStyle and StyleCLIP including changes to expression, facial hair, make-up, and hairstyle.
+            </p>
+
+            <span class="center" style="text-align: center;">
+                <video onloadeddata="this.play();" poster="poster.png" width="100%" playsinline loop muted controls>
+                    <source src="images/dicaprio.mp4" type="video/mp4" />
+                    <source src="images/dicaprio.mp4.webm" type="video/webm" />
+                    <source src="images/dicaprio.mp4.ogg" type="video/ogg" />
+                    Your browser does not support the video tag or the file format of this video.
+                </video>
+            </span>
+            <br>
+            <br>
+            <span class="center" style="text-align: center;">
+                <video onloadeddata="this.play();" poster="poster.png" width="100%" playsinline loop muted controls>
+                    <source src="images/brie.mp4" type="video/mp4" />
+                    <source src="images/brie.mp4.webm" type="video/webm" />
+                    <source src="images/brie.mp4.ogg" type="video/ogg" />
+                    Your browser does not support the video tag or the file format of this video.
+                </video>
+            </span>
+
+            <p style="text-align: center;">
+                These semantics are also well-preserved in other domains such as cars, allowing us to easily apply various edits using GANSpace:
+            </p>
+            
+            <span class="center" style="text-align: center;">
+                <video onloadeddata="this.play();" poster="poster.png" width="100%" playsinline loop muted controls>
+                    <source src="images/cars_hypernet_edits.mp4" type="video/mp4" />
+                    <source src="images/cars_hypernet_edits.mp4.webm" type="video/webm" />
+                    <source src="images/cars_hypernet_edits.mp4.ogg" type="video/ogg" />
+                    Your browser does not support the video tag or the file format of this video.
+                </video>
+            </span>
+
+            <br>
+            <hr>
+
+            <p style="text-align: center;">
+                Interestingly, weight offsets learned by HyperStyle trained on FFHQ are also applicable for modifying fine-tuned generators. 
+                <br>
+                This allows us to transfer a source image to a target style while preserving identity and other facial features.
+            </p>
+            
+            <span class="center" style="text-align: center;">
+                <video class="center" display="block" onloadeddata="this.play();" poster="poster.png" width="60%" playsinline loop muted controls>
+                    <source src="images/domain_adaptation_gif.mp4" type="video/mp4" />
+                    <source src="images/domain_adaptation_gif.mp4.webm" type="video/webm" />
+                    <source src="images/domain_adaptation_gif.mp4.ogg" type="video/ogg" />
+                    Your browser does not support the video tag or the file format of this video.
+                </video>
+            </span>
+        
+        <br>
+        <hr>
+
+        <p style="text-align: center;">
+            HyperStyle generalizes well to out-of-domain images, even when unobserved during the training of the hypernetwork or generator. 
+            <br>
+            This hints that HyperStyle does not only learn to correct flawed attributes, but rather learns to refine the generator in a more general sense.
+        </p>
+        
+        <span class="center" style="text-align: center;">
+            <video class="center" display="block" onloadeddata="this.play();" poster="poster.png" width="100%" playsinline loop muted controls>
+                <source src="images/out_of_domain_gif.mp4" type="video/mp4" />
+                <source src="images/out_of_domain_gif.mp4.webm" type="video/webm" />
+                <source src="images/out_of_domain_gif.mp4.ogg" type="video/ogg" />
+                Your browser does not support the video tag or the file format of this video.
+            </video>
+        </span>
+
+        </div>      
+        
+
+
+
+        <div class="content" id="references">
+    
+            <h2>Reference</h2>
+        
+            <code>
+            </code>
+        </div>      
+
+        <div class="content" id="references">
+            Website template is adopted from <a href="http://people.csail.mit.edu/lrchai/">Lucy Chai.</a>
+        </div>      
+
+    </body>
+    
+    </html>
+    
