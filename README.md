@@ -1,5 +1,8 @@
 # HyperStyle: StyleGAN Inversion with HyperNetworks for Real Image Editing
 
+> Yuval Alaluf*, Omer Tov*, Ron Mokady, Rinon Gal, Amit H. Bermano  
+> *Denotes equal contribution  
+> 
 > The inversion of real images into StyleGAN's latent space is a well-studied problem. Nevertheless, applying existing approaches to real-world scenarios remains an open challenge, due to an inherent trade-off between reconstruction and editability: latent space regions which can accurately represent real images typically suffer from degraded semantic control. Recent work proposes to mitigate this trade-off by fine-tuning the generator to add the target image to well-behaved, editable regions of the latent space. While promising, this fine-tuning scheme is impractical for prevalent use as it requires a lengthy training phase for each new image. In this work, we introduce this approach into the realm of encoder-based inversion. We propose HyperStyle, a hypernetwork that learns to modulate StyleGAN's weights to faithfully express a given image in editable regions of the latent space. A naive modulation approach would require training a hypernetwork with over three billion parameters. Through careful network design, we reduce this to be in line with existing encoders. HyperStyle yields reconstructions comparable to those of optimization techniques with the near real-time inference capabilities of encoders. Lastly, we demonstrate HyperStyle's effectiveness on several applications beyond the inversion task, including the editing of out-of-domain images which were never seen during training.
 
 <a href="https://arxiv.org/abs/2111.15666"><img src="https://img.shields.io/badge/arXiv-2111.15666-b31b1b.svg" height=22.5></a>
