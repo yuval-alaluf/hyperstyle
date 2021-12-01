@@ -94,7 +94,7 @@ However, you may use your own paths by changing the necessary values in `configs
 # Training
 
 ## Preparing your Data
-In order to train ReStyle on your own data, you should perform the following steps: 
+In order to train HyperStyle on your own data, you should perform the following steps: 
 1. Update `configs/paths_config.py` with the necessary data paths and model paths for training and inference.
 ```
 dataset_paths = {
