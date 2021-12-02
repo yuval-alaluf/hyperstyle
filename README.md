@@ -10,6 +10,7 @@
 
 Inference Notebook: <a href="http://colab.research.google.com/github/yuval-alaluf/hyperstyle/blob/master/notebooks/inference_playground.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" height=20></a>  
 Animation Notebook: <a href="http://colab.research.google.com/github/yuval-alaluf/hyperstyle/blob/master/notebooks/animations_playground.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" height=20></a>  
+Domain Adaptation Notebook: <a href="http://colab.research.google.com/github/yuval-alaluf/hyperstyle/blob/master/notebooks/domain_adaptation_playground.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" height=20></a>  
 
 
 <p align="center">
