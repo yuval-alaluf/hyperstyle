@@ -1,0 +1,43 @@
+# Configuration for Cog ⚙️
+# Reference: https://github.com/replicate/cog/blob/main/docs/yaml.md
+# This is adapted from notebooks/domain_adaptation_playground.ipynb.
+# ATTN: You can run `python cog_prepare.py` to download/pre-cache model data.
+# You can do that via `cog run python ./notebooks/notebook_utils.py` or just run it
+# on your host, either way should work.
+
+build:
+  # set to true if your model requires a GPU
+  gpu: true
+
+  # a list of ubuntu apt packages to install
+  system_packages:
+    - libglib2.0-0
+    - cmake
+    - unzip
+
+  # python version in the form '3.8' or '3.8.12'
+  python_version: "3.7"
+
+  # a list of packages in the format <package-name>==<version>
+  python_packages:
+    - scipy==1.4.1
+    - matplotlib==3.2.1
+    - tqdm==4.46.0
+    - numpy==1.18.4
+    - opencv-python==4.2.0.34
+    - pillow==7.1.2
+    - tensorboard==2.2.1
+    - torch==1.10.0
+    - torchvision==0.11.1
+    - dlib==19.18.0
+
+  # Commands to run during the build step.
+  run:
+    - echo "getting prereqs -- ninja"
+    - wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip
+    - unzip ninja-linux.zip -d /usr/local/bin
+    - update-alternatives --install /usr/bin/ninja ninja /usr/local/bin/ninja 1 --force
+
+# cog_predict.py defines how predictions are run on your model
+# Adapted the Replicate.com demo from notebooks/domain_adaptation_playground.ipynb.
+predict: "cog_predict.py:Predictor"

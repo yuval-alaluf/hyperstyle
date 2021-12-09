@@ -1,9 +1,4 @@
 import os
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
-from google.colab import auth
-from oauth2client.client import GoogleCredentials
-
 
 HYPERSTYLE_PATHS = {
     "faces": {"id": "1C3dEIIH1y8w1-zQMCyx7rDF0ndswSXh4", "name": "hyperstyle_ffhq.pt"},
@@ -35,6 +30,11 @@ class Downloader:
             self.authenticate()
 
     def authenticate(self):
+        from google.colab import auth
+        from pydrive.auth import GoogleAuth
+        from pydrive.drive import GoogleDrive
+        from oauth2client.client import GoogleCredentials
+
         auth.authenticate_user()
         gauth = GoogleAuth()
         gauth.credentials = GoogleCredentials.get_application_default()
