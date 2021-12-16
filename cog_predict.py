@@ -27,7 +27,7 @@ from cog_prepare import (
     FINETUNED_MODELS,
     RESTYLE_E4E_MODELS,
     run_alignment_offline,
-    NoninteractiveDownloader,
+    StaticDownloader,
 )
 from utils.common import tensor2im
 from utils.domain_adaptation_utils import run_domain_adaptation
@@ -42,23 +42,18 @@ class Predictor(cog.Predictor):
 
     def setup(self):
         """Load the model into memory to make running multiple predictions efficient"""
-        NoninteractiveDownloader.set_torch_home()
         ts_start = time.time()
-
-        experiment_style = "faces"
+        self.preparer = StaticDownloader()
+        self.preparer.set_torch_home()
 
         self.has_gpu = torch.cuda.is_available()
         if not self.has_gpu:
             raise RuntimeError("gpu is required for this predictor")
 
-        self.models_dir = NoninteractiveDownloader.get_save_dir_abspath()
+        self.models_dir = self.preparer.get_save_dir_abspath()
 
-        model_path = os.path.join(
-            self.models_dir, HYPERSTYLE_PATHS[experiment_style]["name"]
-        )
-        w_encoder_path = os.path.join(
-            self.models_dir, W_ENCODERS_PATHS[experiment_style]["name"]
-        )
+        model_path = self.preparer.get_hyperstyle_path()
+        w_encoder_path = self.preparer.get_w_encoder_path()
         net, opts = load_model(
             model_path, update_opts={"w_encoder_checkpoint_path": w_encoder_path}
         )
@@ -71,10 +66,10 @@ class Predictor(cog.Predictor):
         # At time of writing in all 3 of the notebooks, opts.resize_outputs = False.
         self.opts.resize_outputs = False
 
-        print("Model successfully loaded. experiment_style:", experiment_style)
+        print("Model successfully loaded")
         pprint.pprint(vars(self.opts))
 
-        restyle_e4e_path = os.path.join(self.models_dir, RESTYLE_E4E_MODELS["name"])
+        restyle_e4e_path = self.preparer.get_restyle_e4e_path()
         restyle_e4e, restyle_e4e_opts = load_model(
             restyle_e4e_path, is_restyle_encoder=True
         )
@@ -87,7 +82,7 @@ class Predictor(cog.Predictor):
         ts_end = time.time()
         print("DONE. setup() took", ts_end - ts_start, "seconds")
 
-    @cog.input("image", type=Path, help="Input image")
+    @cog.input("input", type=Path, help="Input image")
     @cog.input(
         "style",
         type=str,
@@ -96,20 +91,17 @@ class Predictor(cog.Predictor):
     )
     def predict(self, image, style):
         """Run a single prediction on the model"""
-        NoninteractiveDownloader.set_torch_home()
+        self.preparer.set_torch_home()
         print("Begin prediction")
 
-        image_path = str(image)
-        del image  # Foolproofing: we are done with that varible.
-
-        generator_path = os.path.join(self.models_dir, FINETUNED_MODELS[style]["name"])
+        generator_path = self.preparer.get_generator_path(generator_type=style)
         fine_tuned_generator = load_generator(generator_path)
         print(f"Fine-tuned {style} generator successfully loaded!")
 
         print("Loading and preparing image")
-
         resize_tup = (256, 256)
 
+        image_path = input
         img = run_alignment_offline(image_path)
         img.resize(resize_tup)
 

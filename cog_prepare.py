@@ -2,7 +2,8 @@
 
 The code in here is copied from inline code in the `notebooks`.
 """
-import os, sys
+import os
+import sys
 
 sys.path.append(".")
 
@@ -14,11 +15,8 @@ from notebooks.notebook_utils import (
     RESTYLE_E4E_MODELS,
 )
 
-CHOICES_OF_EXPERIMENT_STYLE = set(HYPERSTYLE_PATHS.keys())
-CHOICES_OF_DOMAIN_MODELS = set(FINETUNED_MODELS.keys())
 
-
-class NoninteractiveDownloader(Downloader):
+class StaticDownloader(Downloader):
     """It's `Downloader` from notebook_utils.py, but with these differences:
 
     - It sets use_pydrive=False to use gdown instead. (pydrive needs interactive auth)
@@ -46,7 +44,9 @@ class NoninteractiveDownloader(Downloader):
         restyle_e4e_path = self.get_path(RESTYLE_E4E_MODELS["name"])
         return restyle_e4e_path
 
-    def get_domain_model_path(self, generator_type):
+    def get_generator_path(self, generator_type):
+        if generator_type not in FINETUNED_MODELS:
+            raise KeyError(f"Unknown generator type: {generator_type}")
         generator_path = self.get_path(FINETUNED_MODELS[generator_type]["name"])
         return generator_path
 
@@ -82,14 +82,14 @@ class NoninteractiveDownloader(Downloader):
         - https://pytorch.org/docs/stable/hub.html#loading-models-from-hub
           (Section titled "Where are my downloaded models saved?")
         """
-        save_dir = NoninteractiveDownloader.get_save_dir_abspath()
+        save_dir = StaticDownloader.get_save_dir_abspath()
         torch_home = os.path.abspath(os.path.join(save_dir, "torch"))
         os.makedirs(torch_home, exist_ok=True)
         os.environ["TORCH_HOME"] = torch_home
 
     @staticmethod
     def get_shape_predictor_path():
-        save_dir = NoninteractiveDownloader.get_save_dir_abspath()
+        save_dir = StaticDownloader.get_save_dir_abspath()
         filename = "shape_predictor_68_face_landmarks.dat"
         return os.path.join(save_dir, filename)
 
@@ -97,7 +97,7 @@ class NoninteractiveDownloader(Downloader):
     def predownload_shape_predictor():
         pwd = os.getcwd()
         try:
-            shape_predictor_path = NoninteractiveDownloader.get_shape_predictor_path()
+            shape_predictor_path = StaticDownloader.get_shape_predictor_path()
             if os.path.exists(shape_predictor_path):
                 print("SKIP: shape_predictor already exists", shape_predictor_path)
             else:
@@ -120,7 +120,7 @@ class NoninteractiveDownloader(Downloader):
             from torchvision.models.resnet import model_urls
 
             model_url = model_urls["resnet34"]
-            NoninteractiveDownloader.set_torch_home()
+            StaticDownloader.set_torch_home()
             torch.hub.load_state_dict_from_url(model_url)  # causes download
             print("Done.")
         except Exception:
@@ -136,7 +136,7 @@ def run_alignment_offline(image_path):
     import dlib
     from scripts.align_faces_parallel import align_face
 
-    shape_predictor_path = NoninteractiveDownloader.get_shape_predictor_path()
+    shape_predictor_path = StaticDownloader.get_shape_predictor_path()
     if not os.path.exists(shape_predictor_path):
         raise IOError("cannot run_alignment: model not found, live fetching disabled")
     predictor = dlib.shape_predictor(shape_predictor_path)
@@ -144,11 +144,15 @@ def run_alignment_offline(image_path):
     return aligned_image
 
 
+CHOICES_OF_EXPERIMENT_STYLE = set(HYPERSTYLE_PATHS.keys())
+CHOICES_OF_DOMAIN_MODELS = set(FINETUNED_MODELS.keys())
+
+
 def _precache_domain_adaptation_demo(
     chosen_experiment_styles=tuple(["faces"]),
     chosen_domain_models=tuple(sorted(CHOICES_OF_DOMAIN_MODELS)),
 ):
-    downloader = NoninteractiveDownloader()
+    downloader = StaticDownloader()
 
     if not set(chosen_experiment_styles).issubset(CHOICES_OF_EXPERIMENT_STYLE):
         raise ValueError("invalid chosen_experiment_styles")
@@ -163,7 +167,7 @@ def _precache_domain_adaptation_demo(
             not os.path.exists(hyperstyle_path)
             or os.path.getsize(hyperstyle_path) < 1000000
         ):
-            print(f"Downloading HyperStyle model for", experiment_style)
+            print("Downloading HyperStyle model for", experiment_style)
             downloader.download_file(
                 file_id=HYPERSTYLE_PATHS[experiment_style]["id"],
                 file_name=HYPERSTYLE_PATHS[experiment_style]["name"],
@@ -195,7 +199,7 @@ def _precache_domain_adaptation_demo(
 
     for generator_type in sorted(chosen_domain_models):
         print("START: Downloading for generator_type:", generator_type)
-        generator_path = downloader.get_domain_model_path(generator_type)
+        generator_path = downloader.get_generator_path(generator_type)
 
         if not os.path.exists(generator_path):
             print(f"Downloading fine-tuned {generator_type} generator...")
