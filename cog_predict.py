@@ -22,10 +22,6 @@ import torchvision.transforms as transforms
 sys.path.append(".")
 
 from cog_prepare import (
-    HYPERSTYLE_PATHS,
-    W_ENCODERS_PATHS,
-    FINETUNED_MODELS,
-    RESTYLE_E4E_MODELS,
     run_alignment_offline,
     StaticDownloader,
 )
