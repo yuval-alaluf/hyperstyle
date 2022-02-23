@@ -23,6 +23,35 @@ Doing so enables one to effectively apply techniques such as StyleCLIP and Inter
 # Description   
 Official Implementation of our HyperStyle paper for both training and evaluation. HyperStyle introduces a new approach for learning to efficiently modify a pretrained StyleGAN generator based on a given target image through the use of hypernetworks.
 
+# Table of Contents
+- [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+- [Pretrained HyperStyle Models](#pretrained-hyperstyle-models)
+  * [Auxiliary Models](#auxiliary-models)
+    + [Pretrained W-Encoders](#pretrained-w-encoders)
+    + [StyleGAN2 Generators](#stylegan2-generators)
+    + [Other Utility Models](#other-utility-models)
+- [Training](#training)
+  * [Preparing your Data](#preparing-your-data)
+  * [Preparing your Generator](#preparing-your-generator)
+  * [Training HyperStyle](#training-hyperstyle)
+    + [Additional Notes](#additional-notes)
+    + [Pre-Extracting Initial Inversions](#pre-extracting-initial-inversions)
+- [Inference](#inference)
+  * [Inference Notebooks](#inference-notebooks)
+  * [Inference Script](#inference-script)
+  * [Computing Metrics](#computing-metrics)
+  * [Editing](#editing)
+    + [Editing Faces with InterFaceGAN](#editing-faces-with-interfacegan)
+    + [Editing Cars with GanSpace](#editing-cars-with-ganspace)
+    + [Editing Faces with StyleCLIP](#editing-faces-with-styleclip)
+- [Domain Adaptation](#domain-adaptation)
+- [Repository structure](#repository-structure)
+- [Related Works](#related-works)
+- [Credits](#credits)
+- [Acknowledgments](#acknowledgments)
+- [Citation](#citation)
 
 # Getting Started
 ## Prerequisites
@@ -55,7 +84,7 @@ These include the pretrained e4e encoders into W, pretrained StyleGAN2 generator
 
 <br>
 
-### **Pretrained W-Encoders** 
+### Pretrained W-Encoders
 | Path | Description
 | :--- | :----------
 |[Faces W-Encoder](https://drive.google.com/file/d/1M-hsL3W_cJKs77xM1mwq2e9-J0_m7rHP/view?usp=sharing) | Pretrained e4e encoder trained on FFHQ into the W latent space.
@@ -64,7 +93,7 @@ These include the pretrained e4e encoders into W, pretrained StyleGAN2 generator
 
 <br>
 
-### **StyleGAN2 Generators**</u>
+### StyleGAN2 Generators
 | Path | Description
 | :--- | :----------
 |[FFHQ StyleGAN](https://drive.google.com/file/d/1EM87UquaoQmk17Q8d5kYIAHqu0dkYqdT/view?usp=sharing) | StyleGAN2 model trained on FFHQ with 1024x1024 output resolution.
@@ -77,7 +106,7 @@ Note: all StyleGAN models are converted from the official TensorFlow models to P
 
 <br>
 
-### **Other Utility Models**
+### Other Utility Models
 | Path | Description
 | :--- | :----------
 |[IR-SE50 Model](https://drive.google.com/file/d/1KW7bjndL3QG3sxBbZxreGHigcCCpsDgn/view?usp=sharing) | Pretrained IR-SE50 model taken from [TreB1eN](https://github.com/TreB1eN/InsightFace_Pytorch) for use in our ID loss and encoder backbone on human facial domain.
@@ -161,7 +190,7 @@ python scripts/train.py \
 ```
   
 
-### **Additional Notes**:
+### Additional Notes
 - To select which generator layers to tune with the hypernetwork, you can use the `--layers_to_tune` flag.
     - By default, we will alter all non-toRGB convolutional layers. 
 - ID/similarity losses: 
@@ -174,7 +203,7 @@ python scripts/train.py \
 
 <br> 
 
-### **Pre-Extracting Initial Inversions:**  
+### Pre-Extracting Initial Inversions
 To provide a small speed-up and slightly reduce memory consumption, we could pre-extract all the latents and inversions from our W-encoder rather than inverting on the fly during training.   
 We provide an example for how to do this in `configs/data_configs.py` under the `ffhq_hypernet_pre_extract` dataset.  
 Here, we must define: 
@@ -265,7 +294,7 @@ For performing inference and editing using InterFaceGAN (for faces) and GANSpace
 
 <br>
 
-### **Editing Faces with InterFaceGAN:**
+### Editing Faces with InterFaceGAN
 ```
 python editing/inference_face_editing.py \
 --exp_dir=/path/to/experiment \
@@ -281,7 +310,7 @@ For InterFaceGAN we currently support edits of age, pose, and smile.
 
 <br>
 
-### **Editing Cars with GanSpace:**
+### Editing Cars with GanSpace
 ```
 python editing/inference_cars_editing.py \
 --exp_dir=/path/to/experiment \
@@ -298,7 +327,7 @@ For each image, we save the original image followed by the inversion and the res
 
 <br>
 
-### **Editing Faces with StyleCLIP**:  
+### Editing Faces with StyleCLIP 
 In addition, we support editing with StyleCLIP's global directions approach on the human faces domain. Editing can be performed by running `editing/styleclip/edit.py`. For example,
 ```
 python editing/styleclip/edit.py \
