@@ -1,4 +1,4 @@
-# HyperStyle: StyleGAN Inversion with HyperNetworks for Real Image Editing
+# HyperStyle: StyleGAN Inversion with HyperNetworks for Real Image Editing (CVPR 2022)
 
 > Yuval Alaluf*, Omer Tov*, Ron Mokady, Rinon Gal, Amit H. Bermano  
 > *Denotes equal contribution  
