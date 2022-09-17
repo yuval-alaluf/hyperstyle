@@ -306,7 +306,8 @@ python editing/inference_face_editing.py \
 --test_workers=4 \
 --n_iters_per_batch=3 \
 --edit_directions=age,pose,smile \
---factor_ranges=5
+--factor_range=5 \
+----load_w_encoder
 ```
 For InterFaceGAN we currently support edits of age, pose, and smile. 
 
